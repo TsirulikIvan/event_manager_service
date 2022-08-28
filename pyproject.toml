@@ -9,6 +9,8 @@ python = "^3.10"
 fastapi = "^0.81.0"
 alembic = "^1.8.1"
 uvicorn = "^0.18.3"
+databases = "^0.6.1"
+asyncpg = "^0.26.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
