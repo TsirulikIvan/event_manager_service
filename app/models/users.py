@@ -1,5 +1,6 @@
-from sqlalchemy import MetaData, Table, Integer, String, Column, Enum
 import enum
+
+from sqlalchemy import Column, Enum, Integer, MetaData, String, Table
 
 
 class UserRole(enum.Enum):
@@ -20,5 +21,5 @@ users_table = Table(
     Column("email", String(50), unique=True, index=True),
     Column("vk_link", String(150), unique=True),
     Column("password", String()),
-    Column("role", Enum(UserRole))
+    Column("role", Enum(UserRole)),
 )

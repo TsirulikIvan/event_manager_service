@@ -8,7 +8,6 @@ class Setting(BaseConfig):
     DATABASE_URL: str = "localhost:5432/postgres"
     DEBUG: bool = True
 
-
     class Config:
         env_file = ".env"
         case_sensitive = True

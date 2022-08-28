@@ -21,3 +21,62 @@ pylint = "^2.15.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-lenght = 100
+
+[tool.mypy]
+python_version = '3.10'
+check_untyped_defs = true
+disallow_any_generics = true
+follow_imports = 'silent'
+no_implicit_reexport = true
+show_error_codes = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+plugins = ["pydantic.mypy"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
+
+[[tool.mypy.overrides]]
+module = [
+    "uvicorn",
+    "camtypes.*",
+    "nats.*",
+    "pynats.*",
+    "loguru.*",
+    "requests.*",
+    "pytest.*",
+    "pytest_mock.*",
+    "factory.*",
+    "tests.*",
+    "faker_enum.*",
+    "sqlalchemy.*"
+]
+ignore_missing_imports = true
+
+[tool.pylint]
+[tool.pylint.master]
+ignore = ['migrations']
+jobs = 0
+persistent = ['yes']
+unsafe-load-any-extension = ['no']
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = ['all']
+enable = [
+  'old-ne-operator,old-octal-literal,apply-builtin,basestring-builtin,buffer-builtin,cmp-builtin,unichr-builtin,C0203,C0204,C0303,C0304,C0321,C0325,C1001,E0001,E0101,E0104,E0105,E0108,E0213,E0601,E0602,E0701,E0710,E0711,E0712,E1001-E1004,E1121,E1122,E1200,E1201,E1205,E1206,E1300-E1306,W0101,W0104,W0107,W0109,W0231,W0401',
+]
+
+[tool.pylint.'REPORTS']
+evaluation = ['10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)']
+output-format = ['text']
+reports = ['no']
+score = ['yes']
+
+
+
