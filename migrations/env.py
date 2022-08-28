@@ -8,7 +8,7 @@ from sqlalchemy import pool
 sys.path.append(os.getcwd())
 from os import environ
 from alembic import context
-from app.models import users, events, groups, users_to_groups
+from app.models import users, events, groups, users_to_groups, equipment
 
 
 config = context.config
@@ -21,7 +21,7 @@ config.set_section_option(section, "DB_HOST", "localhost")
 
 fileConfig(config.config_file_name)
 
-target_metadata = [users.metadata, groups.metadata, events.metadata, users_to_groups.metadata]
+target_metadata = [users.metadata, groups.metadata, events.metadata, users_to_groups.metadata, equipment.metadata]
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.

@@ -1,6 +1,6 @@
 import enum
 
-from sqlalchemy import Column, Enum, Integer, MetaData, String, Table
+from sqlalchemy import Column, Enum, Integer, MetaData, String, Table, Boolean
 
 
 class UserRole(enum.Enum):
@@ -20,6 +20,7 @@ users_table = Table(
     Column("surname", String(100), nullable=False),
     Column("email", String(50), unique=True, index=True),
     Column("vk_link", String(150), unique=True),
+    Column("have_car", Boolean, default=False),
     Column("password", String()),
     Column("role", Enum(UserRole)),
 )
