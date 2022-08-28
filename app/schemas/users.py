@@ -21,5 +21,5 @@ class UserResponse(BaseModel):
 
 
 class UpdateUserRequest(BaseModel):
-    email: EmailStr
-    vk_link: str
+    email: EmailStr | None
+    vk_link: str | None

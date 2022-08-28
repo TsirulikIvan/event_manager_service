@@ -65,7 +65,7 @@ async def update_user(user_id: int, update_params: UpdateUserRequest) -> None:
     query = (
         users_table.update()
         .where(users_table.c.id == user_id)
-        .values(**update_params.dict())
+        .values(**{key: value for key, value in update_params.dict().items() if value})
     )
     try:
         response = await database.execute(query)
@@ -73,3 +73,12 @@ async def update_user(user_id: int, update_params: UpdateUserRequest) -> None:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail=str(e))
 
     return response
+
+
+@router.delete("/{user_id}", summary="Delete user from DB")
+async def delete_user(user_id: int) -> None:
+    query = users_table.delete().where(users_table.c.id == user_id)
+    response = await database.execute(query)
+
+    if not response:
+        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="User not found")
