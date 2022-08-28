@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "event_manager"
+version = "0.1.0"
+description = ""
+authors = ["V4SRandiSPB <ivan@v4scale.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.81.0"
+alembic = "^1.8.1"
+uvicorn = "^0.18.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+pytest-cov = "^3.0.0"
+black = "^22.6.0"
+isort = "^5.10.1"
+mypy = "^0.971"
+pylint = "^2.15.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
