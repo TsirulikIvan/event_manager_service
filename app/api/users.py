@@ -11,7 +11,7 @@ from app.models.users import UserRole, users_table
 from app.schemas.users import (CreateUserRequest, UpdateUserRequest,
                                UserResponse)
 
-router = APIRouter()
+router = APIRouter(tags=["user - API"])
 
 
 def get_random_string(length=12):
@@ -25,7 +25,7 @@ def hash_password(password: str, salt: str = None):
     return enc.hex()
 
 
-@router.get("/", summary="Get user list")
+@router.get("", summary="Get user list")
 async def get_users_list() -> list[UserResponse]:
     return [
         UserResponse(**user)

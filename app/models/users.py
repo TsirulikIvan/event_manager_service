@@ -1,6 +1,6 @@
 import enum
 
-from sqlalchemy import Column, Enum, Integer, MetaData, String, Table, Boolean
+from sqlalchemy import Boolean, Column, Enum, Integer, MetaData, String, Table
 
 
 class UserRole(enum.Enum):

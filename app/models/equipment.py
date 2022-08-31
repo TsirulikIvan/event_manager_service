@@ -1,6 +1,8 @@
 import enum
 
-from sqlalchemy import Column, Enum, Integer, MetaData, String, Table, ForeignKey
+from sqlalchemy import (Column, Enum, ForeignKey, Integer, MetaData, String,
+                        Table)
+
 from app.models.users import users_table
 
 
@@ -18,5 +20,5 @@ equipment_table = Table(
     metadata,
     Column("user_id", Integer, ForeignKey(users_table.c.id)),
     Column("name", String(100), nullable=False),
-    Column("class", Enum(EquipmentClass)),
+    Column("eq_class", Enum(EquipmentClass)),
 )
