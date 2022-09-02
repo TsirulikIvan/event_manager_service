@@ -8,7 +8,11 @@ ENV PYTHONPATH=${APP_HOME} \
     PYTHONHASHSEED=random \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100
+    PIP_DEFAULT_TIMEOUT=100 \
+    DB_HOST="host.docker.internal.database" \
+    DB_USER="user" \
+    DB_PASSWORD="password" \
+    DB_NAME="postgres"
 
 RUN apt-get update && apt-get install git curl gcc -y
 WORKDIR $APP_HOME
@@ -18,13 +22,15 @@ COPY . $APP_HOME
 RUN curl -sSL https://install.python-poetry.org/ | python3 - \
     && export PATH="/root/.local/bin:$PATH" \
     && poetry config virtualenvs.create false \
-    && pip install --upgrade pip && \
-    if [ "$ENV_TYPE" = 'Production' ]; \
-    then \
-        poetry install --no-dev; \
-    else \
-        poetry install; \
-    fi
+    && pip install --upgrade pip \
+    && poetry install --no-dev
 
 EXPOSE 8001
+
+RUN alembic upgrade head
+
+WORKDIR $APP_HOME/app
+
+CMD ["sh", "entrypoint.sh"]
+
 

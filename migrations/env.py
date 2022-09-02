@@ -6,7 +6,6 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 sys.path.append(os.getcwd())
-from os import environ
 from alembic import context
 from app.models import users, events, groups, users_to_groups, equipment
 
@@ -14,10 +13,11 @@ from app.models import users, events, groups, users_to_groups, equipment
 config = context.config
 
 section = config.config_ini_section
-config.set_section_option(section, "DB_USER", "user")
-config.set_section_option(section, "DB_PASS", "password")
-config.set_section_option(section, "DB_NAME", "postgres")
-config.set_section_option(section, "DB_HOST", "localhost")
+config.set_section_option(section, "DB_USER", os.getenv("DB_USER"))
+config.set_section_option(section, "DB_PASS", os.getenv("DB_PASSWORD"))
+config.set_section_option(section, "DB_NAME", os.getenv("DB_NAME"))
+config.set_section_option(section, "DB_HOST", os.getenv("DB_HOST"))
+
 
 fileConfig(config.config_file_name)
 
