@@ -17,16 +17,12 @@ services:
     networks:
       - event_network
 
-  event_service:
-    build: .
-    container_name: event_manager_app
-    command: bash -c "cd ./app && uvicorn main:app --host 0.0.0.0 --port 8001 --reload"
+  rabbit_mq:
+    image: rabbitmq
+    container_name: 'rabbitmq'
     ports:
-      - "8001:8001"
-    networks:
-      - event_network
-    depends_on:
-      - database
+      - 5672:5672
+      - 15672:15672
 
 
 
